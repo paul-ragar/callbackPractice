@@ -1,16 +1,16 @@
 /* In this repo your job is to write functions to make each function call work properly.
-Below is a sample problem 
+Below is a sample problem
 
   //code here for sayHi
 
    sayHi('Hi Katie', function(thingToSay){
       alert(thingToSay);
    });
-   
 
-and what you should write is the sayHi function that makes the code above work, 
-    
-    
+
+and what you should write is the sayHi function that makes the code above work,
+
+
    var sayHi = function(str, cb){
     cb(str);
    }
@@ -18,14 +18,16 @@ and what you should write is the sayHi function that makes the code above work,
    sayHi('Hi Katie', function(thingToSay){
       alert(thingToSay); //should alert ('Hi Katie')'
    });
-    
-    
+
+
 */
 
 
 
-  //Code Here for first
-  
+function first(arr, cb) {
+  return cb(arr[0]);
+}
+
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 first(names, function(firstName){
@@ -36,10 +38,10 @@ first(names, function(firstName){
 
 /* NEXT PROBLEM ---- NEXT PROBLEM ---- NEXT PROBLEM ---- NEXT PROBLEM */
 
+function last(array1, cb) {
+  return cb(array1[array1.length -1]);
+}
 
-
-
-  //Code Here for last
 
 last(names, function(lastName){
   console.log('The last name in names is ' + lastName);
@@ -54,7 +56,9 @@ last(names, function(lastName){
 
 
 
-
+function multiply(num1, num2, cb) {
+  return cb(num1 * num2);
+}
 
   //Code Here for multiply
 
@@ -68,7 +72,16 @@ multiply(4, 3, function(answer){
 
 /* NEXT PROBLEM ---- NEXT PROBLEM ---- NEXT PROBLEM ---- NEXT PROBLEM */
 
-
+function contains(array1, str, cb) {
+  for (var i = 0; i < array1.length; i++) {
+    if (array1[i] === str) {
+      return cb(true);
+    }
+    else {
+      return cb(false);
+    }
+  }
+}
 
 
 
@@ -88,7 +101,16 @@ contains(names, 'Colt', function(result){
 
 /* NEXT PROBLEM ---- NEXT PROBLEM ---- NEXT PROBLEM ---- NEXT PROBLEM */
 
-
+function uniq(array1, cb) {
+  for (var i = 0; i < array1.length; i++) {
+    for (var j = i + 1; j < array1.length; j++) {
+      if (array1[i] === array1[j]) {
+        array1.splice(j,1);
+      }
+    }
+  }
+  return cb(array1);
+}
 
 
     //Code Here for uniq
@@ -103,10 +125,12 @@ uniq(names, function(uniqArr){
 
 /* NEXT PROBLEM ---- NEXT PROBLEM ---- NEXT PROBLEM ---- NEXT PROBLEM */
 
+function each(arr, cb) {
+  for (var i = 0; i < arr.length; i++) {
+    cb(arr[i], arr.indexOf(arr[i]));
+  }
 
-
-
-    //Code Here for each
+}
 
 each(names, function(item, indice){
   console.log('The item in the ' + indice + ' position is ' + item)
@@ -120,7 +144,15 @@ each(names, function(item, indice){
 
 
 
-
+function getUserById(arr, str, cb){
+  var newObj = {};
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i].id === str) {
+      newObj = arr[i];
+      return cb(newObj);
+    }
+  }
+}
 
  //code here for getUserById
 
@@ -146,5 +178,5 @@ var users = [
 ];
 
 getUserById(users, '16t', function(user){
-  console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address); 
+  console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address);
 });
